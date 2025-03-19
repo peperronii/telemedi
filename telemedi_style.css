@@ -1,0 +1,39 @@
+:root {
+	/* mainly use white as background color and black as elements if not themed */
+	--primary-color: #553a90;
+	--secondary-color: #0c632a;
+	--accent-color: #ffff00;
+	--primary-faded-color: #735ba3;
+	--secondary-faded-color: #118e3c;
+
+	--ff: Tahoma, Verdana, sans-serif;
+	font-family:  var(--ff);
+	--s-font: .875rem/1.4em var(--ff);
+	--sb-font: bold .875rem/1.4em var(--ff);
+	--m-font: 1rem/1.4em var(--ff);
+	--mb-font: bold 1rem/1.4em var(--ff);
+	--l-font: 1.125rem/1.2em var(--ff);
+	--lb-font: bold 1.125rem/1.2em var(--ff);
+}
+	body {
+        margin: 0 0 0 0;
+      }
+    header {
+        position: sticky;
+        top: 0px;
+        padding: 10px 10px 7px 20px;
+        border-bottom: solid 5px var(--primary-faded-color);
+        background-color: var(--primary-color);
+        color: white;
+      }
+    h1 {
+        text-align: center;
+        margin: 0 0 0 0;
+      }
+    h1::after {
+        content: ".";
+        color: var(--secondary-faded-color);
+      }
+    main {
+        margin: 0 0 0 0;
+    }

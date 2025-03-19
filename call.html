@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="color-scheme" content="light dark" />
+    <link rel="stylesheet" href="telemedi_style.css">
+    <title>Telemedi Demo Call</title>
+    <script src="https://unpkg.com/peerjs@1.5.4/dist/peerjs.min.js"></script>
+    <script>
+      const link = "http://169.254.241.85/api"
+      const constraints = {video:true, audio:true}
+      const peer = new Peer('',{
+        host: '169.254.186.46',
+        port: 9000
+      });
+      navigator.mediaDevices.getUserMedia({video: true, audio: true})
+        .then(stream => {
+          document.querySelector('video#localVideo').srcObject = stream;
+          const connect = peer.call('1234', stream);
+          connect.on('stream', remoteStream => {
+            document.querySelector('video#remoteVideo').srcObject = remoteStream;
+            document.querySelector("#zoom").addEventListener("input", (event) => {
+              fetch(link,{
+                method: "PUT",
+                body: JSON.stringify({data: {6:event.target.value}})
+              })
+                .then(res => {
+                  console.log(res)
+                })
+                .catch(err => {
+                  console.error("error occur while sending pan", err)
+                });
+            });
+            document.querySelector("#pan").addEventListener("input", (event) => {
+              fetch(link,{
+                method: "PUT",
+                body: JSON.stringify({data: {7:event.target.value}})
+              })
+                .then(res => {
+                  console.log(res)
+                })
+                .catch(err => {
+                  console.error("error occur while sending pan", err)
+                });
+            });
+            document.querySelector("#tilt").addEventListener("input", (event) => {
+              fetch(link,{
+                method: "PUT",
+                body: JSON.stringify({data: {8:event.target.value}})
+              })
+                .then(res => {
+                  console.log(res)
+                })
+                .catch(err => {
+                  console.error("error occur while sending pan", err)
+                });
+            });
+          });
+          connect.on('error', err => {console.error(err)});
+        })
+        .catch(err => {
+          console.error('Error accessing local video', err);
+        });
+    </script>
+    <style>
+      #localVideo {
+        transform: rotateY(180deg); 
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <h1>telemedi</h1>
+    </header>
+    <main class="container" style="height:60vh">
+      <div class="grid">
+        <div>
+          <video id="localVideo" muted width="320" height="240" autoplay/>
+        </div>
+        <div>
+          <video id="remoteVideo" muted width="640" height="480" autoplay/>
+        </div>
+      </div>
+    </main>
+    <footer style="height:10vh">
+      <div class="grid">
+        <div>
+          <button onclick="history.back()" class="contrast" style="float:right">Hangup</button>
+        </div>
+        <div>
+          <label>
+            <input name="mute" type="checkbox" role="switch" />
+            Mute
+          </label>
+          <label>
+            <input name="disable_video" type="checkbox" role="switch" />
+            Disable Video
+          </label>
+        </div>
+        <div>
+          <label>
+            Zoom
+            <input id="zoom" type="range" min="1" max="10" step="1" />
+          </label>
+          <label>
+            Pan
+            <input id="pan" type="range" min="-10" max="10" step="1" />
+          </label>
+          <label>
+            Tilt
+            <input id="tilt" type="range" min="-10" max="10" step="1" />
+          </label>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

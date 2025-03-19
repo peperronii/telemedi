@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="color-scheme" content="light dark" />
+    <link rel="stylesheet" href="telemedi_style.css">
+    <style>
+      body {
+        background-color: white;
+      }
+      main {
+        margin-top: 10vh;
+      }
+      h1 {
+        color: black;
+        font-size: 2rem;
+        font-weight: bold;
+        text-align: center;
+      }
+      form {
+        margin: auto;
+        width: 100%;
+      }
+      fieldset {
+        border-style: solid;
+        box-shadow: 0px 0px 10px silver;
+        background-color: white;
+        border-color: var(--primary-color);
+        border-radius: 10px;
+        margin-left: 25%;
+        margin-right: 25%;
+        width: 50%;
+        height: 450px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-evenly;
+        align-items: center;
+      }
+      input {
+        font: var(--m-font);
+        width: 90%;
+        height: 14%;
+        border-radius: 10px;
+        border-width: 2px;
+        border-color: grey;
+        border-style: solid;
+      }
+      .textbox {
+        padding-left: 2%;
+        transition: border-color 0.5s, box-shadow 1s;
+      }
+      .textbox:hover{
+        box-shadow: 0px 0px 10px var(--secondary-faded-color);
+        border-color: var(--secondary-faded-color);
+      }
+      h1::after{
+        content: ".";
+        color: var(--secondary-color);
+      }
+      .button {
+        transition-duration: 0.2s;
+        border-style: none;
+        background-color: var(--primary-color);
+        color: white;
+        margin-left: 25%;
+        margin-right: 25%;
+        width: 50%;
+        height: 50px;
+        margin-top: 20px;
+      }
+      .button:hover {
+        box-shadow: -2px -2px 6px var(--primary-color) inset;
+        background-color: var(--primary-faded-color);
+      }
+      .button:active {
+        box-shadow: 0px 0px;
+      }
+    </style>
+    <title>Telemedi Demo Login</title>
+  </head>
+  <body>
+    <main>
+          <form action="./main.html">
+            <fieldset>
+              <h1>telemedi</h1>
+              <input
+                class ="textbox"
+                type="email"
+                name="email"
+                placeholder="Email"
+                autocomplete="email"
+              />
+              <input
+                class="textbox"
+                type="password"
+                name="password"
+                placeholder="Password"
+              />
+              <input
+              class="button"
+              type="submit"
+              value="Login"
+             />
+            </fieldset>
+
+          </form>
+    </main>
+  </body>
+</html>

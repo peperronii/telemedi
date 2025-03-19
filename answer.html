@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="color-scheme" content="light dark" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.jade.min.css" />
+    <title>Telemedi Demo Call</title>
+    <script src="https://unpkg.com/peerjs@1.5.4/dist/peerjs.min.js"></script>
+    <script>
+      const constraints = {video: true, audio: true};
+      const peer = new Peer('1234', {
+        host: 'localhost',
+        port: 9000
+      });
+      navigator.mediaDevices.getUserMedia(constraints)
+        .then(stream => {
+          document.querySelector('video#localVideo').srcObject = stream;
+          peer.on('call', call => {
+            if(true)
+            {
+              call.answer(stream);
+              call.on('stream', remoteStream => {
+                document.querySelector('video#remoteVideo').srcObject = remoteStream;
+              });
+            } else {
+              call.close();
+            }
+          });
+        })
+        .catch(err => {
+          console.error('Error accessing local video', err);
+        });
+    </script>
+    <style>
+      #localVideo {
+        transform: rotateY(180deg); 
+      }
+    </style>
+  </head>
+  <body>
+    <main class="container">
+      <div class="grid">
+        <div>
+          <video id="localVideo" muted width="320" height="240" autoplay/>
+        </div>
+        <div>
+          <video id="remoteVideo" muted width="640" height="480" autoplay/>
+        </div>
+      </div>
+    </main>
+
+  </body>
+</html>
