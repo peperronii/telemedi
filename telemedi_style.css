@@ -1,10 +1,11 @@
 :root {
 	/* mainly use white as background color and black as elements if not themed */
-	--primary-color: #553a90;
-	--secondary-color: #0c632a;
-	--accent-color: #ffff00;
-	--primary-faded-color: #735ba3;
-	--secondary-faded-color: #118e3c;
+	--primary-color: #007bd2;
+	--secondary-color: #008b31;
+	--accent-color: #e1a900;
+  --accent-faded-color: #e9c037;
+	--primary-faded-color: #4eb4fe;
+	--secondary-faded-color: #19ba51;
 
 	--ff: Tahoma, Verdana, sans-serif;
 	font-family:  var(--ff);
@@ -32,7 +33,7 @@
       }
     h1::after {
         content: ".";
-        color: var(--secondary-faded-color);
+        color: var(--accent-faded-color);
       }
     main {
         margin: 0 0 0 0;

@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="color-scheme" content="light dark" />
     <link rel="stylesheet" href="telemedi_style.css">
+    <link rel="stylesheet" href="components.css">
     <title>Telemedi Demo Call</title>
     <script src="https://unpkg.com/peerjs@1.5.4/dist/peerjs.min.js"></script>
     <script>
@@ -65,7 +66,65 @@
     </script>
     <style>
       #localVideo {
-        transform: rotateY(180deg); 
+        transform: rotateY(180deg);
+        position: absolute;
+        bottom:0;
+        right:0;
+        z-index: 1;
+      }
+      .flexcontainer {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: center;
+        gap: 2rem;
+      }
+      
+      button {
+        font: var(--m-font);
+        color: white;
+        background-color: red;
+        border-style: none;
+        border-bottom: solid 2px darkred;
+        border-radius: 0.5em;
+        padding: 0.5em 1em;
+        cursor: pointer;
+      }
+
+      button:active {
+        border-bottom: none;
+        border-top: 2px solid silver;
+      }
+
+      input[type="range"] {
+        appearance: none;
+        background: whitesmoke;
+        width: 10rem;
+        height: 1.5rem;
+      }
+
+
+      input[type="range"]::-webkit-slider-thumb {
+        border-bottom: solid 2px var(--primary-color);
+        position: relative;
+        appearance: none;
+        -webkit-appearance: none;
+        cursor: pointer;
+        height: 1.5rem;
+        width: 1rem;
+        background: var(--primary-faded-color);
+        z-index: 2;
+      }
+      .slider::-moz-range-thumb {
+        border-bottom: solid 2px var(--primary-color);
+        position: relative;
+        appearance: none;
+        -webkit-appearance: none;
+        cursor: pointer;
+        height: 1.5rem;
+        width: 1rem;
+        background: var(--primary-faded-color);
+        z-index: 2;
       }
     </style>
   </head>
@@ -73,45 +132,37 @@
     <header>
       <h1>telemedi</h1>
     </header>
-    <main class="container" style="height:60vh">
-      <div class="grid">
-        <div>
-          <video id="localVideo" muted width="320" height="240" autoplay/>
-        </div>
-        <div>
-          <video id="remoteVideo" muted width="640" height="480" autoplay/>
-        </div>
-      </div>
+    <main class="container" style="height:60vh; position: relative;">
+      <div class="loading" style="position: absolute; top:calc(50% - 30px); left: calc(50% - 30px);"></div>
+      <video id="localVideo" width="20%" muted autoplay></video>
+      <video id="remoteVideo" style="height: 100%; width: 100%; object-fit: contain;" autoplay></video>
     </main>
-    <footer style="height:10vh">
-      <div class="grid">
-        <div>
-          <button onclick="history.back()" class="contrast" style="float:right">Hangup</button>
-        </div>
-        <div>
-          <label>
-            <input name="mute" type="checkbox" role="switch" />
-            Mute
-          </label>
-          <label>
-            <input name="disable_video" type="checkbox" role="switch" />
-            Disable Video
-          </label>
-        </div>
-        <div>
-          <label>
-            Zoom
-            <input id="zoom" type="range" min="1" max="10" step="1" />
-          </label>
-          <label>
-            Pan
-            <input id="pan" type="range" min="-10" max="10" step="1" />
-          </label>
-          <label>
-            Tilt
-            <input id="tilt" type="range" min="-10" max="10" step="1" />
-          </label>
-        </div>
+    <footer class="flexcontainer">
+      <div style="align-items: end;">
+        <label for="mute">
+          <input id="mute" name="mute" type="checkbox">
+          <img src="./svgs/microphone-svgrepo-com.svg" alt="mute" style="height: 2em; position: relative; bottom: 0.2em">
+        </label>
+        <br>
+        <label for="disable_video">
+          <input id="disable_video" name="disable_video" type="checkbox">
+          <img src="./svgs/video-svgrepo-com.svg" alt="disable video" style="height: 2em; position: relative; bottom: 0.2em">
+        </label>
+      </div>
+      <button onclick="history.back()">End Call</button>
+      <div style="display: grid; grid-template-rows: 1fr 1fr 1fr; font: var(--s-font); color: grey">
+        <label for="zoom">
+          Zoom<br>
+          <input id="zoom" type="range" value="1" min="1" max="10" step="1" />
+        </label>
+        <label for="pan">
+          Pan<br>
+          <input id="pan" type="range" value="0" min="-10" max="10" step="1" />
+        </label>
+        <label for="tilt">
+          Tilt<br>
+          <input id="tilt" type="range" value="0" min="-10" max="10" step="1" />
+        </label>
       </div>
     </footer>
   </body>

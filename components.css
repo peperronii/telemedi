@@ -1,0 +1,104 @@
+/* Loading Component */
+/* From Uiverse.io by satyamchaudharydev */
+
+
+.loading {
+    --size: 30px;
+    --first-block-clr: var(--primary-faded-color);
+    --second-block-clr: var(--accent-faded-color);
+    --clr: #111;
+    width: 100px;
+    height: 100px;
+    position: relative;
+}
+
+.loading::after, .loading::before {
+    box-sizing: border-box;
+    position: absolute;
+    content: "";
+    width: var(--size);
+    height: var(--size);
+    top: 50%;
+    animation: up 2.4s cubic-bezier(0, 0, 0.24, 1.21) infinite;
+    left: 50%;
+    background: var(--first-block-clr);
+}
+
+.loading::after {
+    background: var(--second-block-clr);
+    top: calc(50% - var(--size));
+    left: calc(50% - var(--size));
+    animation: down 2.4s cubic-bezier(0, 0, 0.24, 1.21) infinite;
+}
+
+@keyframes down {
+    0%, 100% {
+        transform: none;
+    }
+
+    25% {
+        transform: translateX(100%);
+    }
+
+    50% {
+        transform: translateX(100%) translateY(100%);
+    }
+
+    75% {
+        transform: translateY(100%);
+    }
+}
+
+@keyframes up {
+    0%, 100% {
+        transform: none;
+    }
+
+    25% {
+        transform: translateX(-100%);
+    }
+
+    50% {
+        transform: translateX(-100%) translateY(-100%);
+    }
+
+    75% {
+        transform: translateY(-100%);
+    }
+}
+
+/* Toggle Switch */
+/* From Uiverse.io by nikk7007 */ 
+input[type=checkbox] {
+    appearance: none;
+    height: 2rem;
+    width: 3.5rem;
+    background-color: var(--primary-faded-color);
+    position: relative;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: .3s ease;
+}
+
+input[type=checkbox]:checked {
+    background-color: red;
+}
+
+input[type=checkbox]::before {
+    content: '';
+    display: block;
+    height: 1.9em;
+    width: 1.9em;
+    transform: translate(-50%, -50%);
+    position: absolute;
+    top: 50%;
+    left: calc(1.9em/2 + .3em);
+    background-color: white;
+    border-bottom: silver solid 2px;
+    border-radius: 4px;
+    transition: .3s ease;
+}
+
+input[type=checkbox]:checked::before {
+    left: calc(100% - (1.9em/2 + .3em));
+}
